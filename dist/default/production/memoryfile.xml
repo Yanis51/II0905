@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+  <executable name="dist/default/production\TP1_CHAT.X.production.hex">
+    <memory name="program">
+      <units>bytes</units>
+      <length>65528</length>
+      <used>2215</used>
+      <free>63313</free>
+    </memory>
+    <memory name="data">
+      <units>bytes</units>
+      <length>3776</length>
+      <used>714</used>
+      <free>3062</free>
+    </memory>
+  </executable>
+</project>
