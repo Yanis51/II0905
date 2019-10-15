@@ -108,7 +108,13 @@ void uartHexaPrint(uint8_t * val,uint8_t n){
 /***                                ***/
 /**************************************/
 
-// A FAIRE
+void CleanScreen()
+{
+    uartWrite(0x1B);
+    uartWrite(0x5B);
+    uartWrite(0x32);
+    uartWrite(0x4A);
+}
 
 
 
@@ -161,8 +167,6 @@ void vT100EraseEndOfLine(void){
 /**************************************/
 
 // A FAIRE
-
-
 
 
 /**************************************/

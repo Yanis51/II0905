@@ -6639,6 +6639,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;VT100.h: 34: void _uartPrint(char * str);
 [; ;VT100.h: 35: void uartHexaPrint(uint8_t * val,uint8_t n);
 [; ;VT100.h: 42: void vT100EraseEndOfLine(void);
+[; ;VT100.h: 43: void CleanScreen();
 [; ;__size_t.h: 4: typedef unsigned size_t;
 [; ;stdarg.h: 7: typedef void * va_list[1];
 [; ;stdarg.h: 10: extern void * __va_start(void);
@@ -6908,13 +6909,37 @@ Version 3.2 HI-TECH Software Intermediate Code
 "104
 [e :UE 786 ]
 }
-"141
+"111
+[v _CleanScreen `(v ~T0 @X0 1 ef ]
+"112
+{
+[; ;VT100.c: 111: void CleanScreen()
+[; ;VT100.c: 112: {
+[e :U _CleanScreen ]
+[f ]
+[; ;VT100.c: 113: uartWrite(0x1B);
+"113
+[e ( _uartWrite (1 -> -> 27 `i `uc ]
+[; ;VT100.c: 114: uartWrite(0x5B);
+"114
+[e ( _uartWrite (1 -> -> 91 `i `uc ]
+[; ;VT100.c: 115: uartWrite(0x32);
+"115
+[e ( _uartWrite (1 -> -> 50 `i `uc ]
+[; ;VT100.c: 116: uartWrite(0x4A);
+"116
+[e ( _uartWrite (1 -> -> 74 `i `uc ]
+[; ;VT100.c: 117: }
+"117
+[e :UE 794 ]
+}
+"147
 [v _vT100EraseEndOfLine `(v ~T0 @X0 1 ef ]
 {
-[; ;VT100.c: 141: void vT100EraseEndOfLine(void){
+[; ;VT100.c: 147: void vT100EraseEndOfLine(void){
 [e :U _vT100EraseEndOfLine ]
 [f ]
-[; ;VT100.c: 145: }
-"145
-[e :UE 794 ]
+[; ;VT100.c: 151: }
+"151
+[e :UE 795 ]
 }

@@ -41,15 +41,27 @@ extern RECEIVED_MESSAGE  rxMessage;
 
 void main (void)
 {
+    uint8_t nbPan;
     SYSTEM_Initialize();
     uartInitialize();
+    MiApp_ProtocolInit(false);
+    MiApp_SetChannel(11);
+    nbPan =  MiApp_SearchConnection(10,0xFFFF);
+    //if(!nbPan) 
+    MiApp_EstablishConnection(0xFF, CONN_MODE_INDIRECT);
+   // MiApp_StartConnection(START_CONN_DIRECT, 10, 32);
+  
+    
+    
+    
     uartPrint("Test");
    
 	while(1)
     {
-        if (uartIsChar())
+
+        if (uartRead())
         {
-            uartPrint("ok");
+            CleanScreen();
             uartRead();
         }
     }

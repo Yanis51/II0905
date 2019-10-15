@@ -8828,6 +8828,7 @@ void uartHexaPrint(uint8_t * val,uint8_t n);
 
 # 42
 void vT100EraseEndOfLine(void);
+void CleanScreen();
 
 # 4 "C:\Program Files (x86)\Microchip\xc8\v1.45\include\__size_t.h"
 typedef unsigned size_t;
@@ -9410,15 +9411,24 @@ extern RECEIVED_MESSAGE rxMessage;
 
 void main (void)
 {
+uint8_t nbPan;
 SYSTEM_Initialize();
 uartInitialize();
+MiApp_ProtocolInit(0);
+MiApp_SetChannel(11);
+nbPan = MiApp_SearchConnection(10,0xFFFF);
+
+MiApp_EstablishConnection(0xFF, 0x01);
+
+# 57
 _uartPrint((char*)"Test");
 
 while(1)
 {
-if (PIR3bits.RC2IF)
+
+if (uartRead())
 {
-_uartPrint((char*)"ok");
+CleanScreen();
 uartRead();
 }
 }

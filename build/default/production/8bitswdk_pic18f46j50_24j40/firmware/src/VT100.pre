@@ -8828,6 +8828,7 @@ void uartHexaPrint(uint8_t * val,uint8_t n);
 
 # 42
 void vT100EraseEndOfLine(void);
+void CleanScreen();
 
 # 4 "C:\Program Files (x86)\Microchip\xc8\v1.45\include\__size_t.h"
 typedef unsigned size_t;
@@ -9048,7 +9049,16 @@ uartWrite(v - 10 + 65);
 }
 }
 
-# 141
+# 111
+void CleanScreen()
+{
+uartWrite(0x1B);
+uartWrite(0x5B);
+uartWrite(0x32);
+uartWrite(0x4A);
+}
+
+# 147
 void vT100EraseEndOfLine(void){
 
 

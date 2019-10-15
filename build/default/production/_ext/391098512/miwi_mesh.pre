@@ -11173,7 +11173,7 @@ uint8_t i;
 
 # 3565
 myShortAddress.Val = 0xFFFF;
-myPANID.Val = 0x9999;
+myPANID.Val = 0x6666;
 
 
 
@@ -11736,7 +11736,7 @@ myParent = 0xFF;
 
 
 
-myPANID.Val = 0x9999;
+myPANID.Val = 0x6666;
 
 MiMAC_SetAltAddress(myShortAddress.v, myPANID.v);
 MiWiStateMachine.bits.memberOfNetwork = 1;

@@ -4,21 +4,20 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _SYSTEM_Initialize `(v ~T0 @X0 0 ef ]
 "31 8bitswdk_pic18f46j50_24j40/firmware/src/VT100.h
 [v _uartInitialize `(v ~T0 @X0 0 ef ]
-"34
+"144 ../MLA/framework\miwi/miwi_api.h
+[v _MiApp_ProtocolInit `(uc ~T0 @X0 0 ef1`uc ]
+"186
+[v _MiApp_SetChannel `(uc ~T0 @X0 0 ef1`uc ]
+"328
+[v _MiApp_SearchConnection `(uc ~T0 @X0 0 ef2`uc`ul ]
+"382
+[v _MiApp_EstablishConnection `(uc ~T0 @X0 0 ef2`uc`uc ]
+"34 8bitswdk_pic18f46j50_24j40/firmware/src/VT100.h
 [v __uartPrint `(v ~T0 @X0 0 ef1`*uc ]
-"9149 C:\Program Files (x86)\Microchip\xc8\v1.45\include\pic18f46j50.h
-[s S398 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S398 . RTCCIF TMR3GIF CTMUIF TMR4IF TX2IF RC2IF BCL2IF SSP2IF ]
-"9159
-[s S399 :1 `uc 1 :1 `uc 1 :2 `uc 1 :1 `uc 1 ]
-[n S399 . . RXBNIF . TXBNIF ]
-"9148
-[u S397 `S398 1 `S399 1 ]
-[n S397 . . . ]
-"9166
-[v _PIR3bits `VS397 ~T0 @X0 0 e@4004 ]
-"32 8bitswdk_pic18f46j50_24j40/firmware/src/VT100.h
+"32
 [v _uartRead `(uc ~T0 @X0 0 ef ]
+"43
+[v _CleanScreen `(v ~T0 @X0 0 ef ]
 [; ;htc.h: 26: extern const char __xc8_OPTIM_SPEED;
 [; ;htc.h: 28: extern double __fpnormalize(double);
 [; ;xc8debug.h: 14: extern void __builtin_software_breakpoint(void);
@@ -6570,6 +6569,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;VT100.h: 34: void _uartPrint(char * str);
 [; ;VT100.h: 35: void uartHexaPrint(uint8_t * val,uint8_t n);
 [; ;VT100.h: 42: void vT100EraseEndOfLine(void);
+[; ;VT100.h: 43: void CleanScreen();
 [; ;__size_t.h: 4: typedef unsigned size_t;
 [; ;stdarg.h: 7: typedef void * va_list[1];
 [; ;stdarg.h: 10: extern void * __va_start(void);
@@ -6939,47 +6939,62 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;main.c: 43: {
 [e :U _main ]
 [f ]
-[; ;main.c: 44: SYSTEM_Initialize();
 "44
-[e ( _SYSTEM_Initialize ..  ]
-[; ;main.c: 45: uartInitialize();
+[v _nbPan `uc ~T0 @X0 1 a ]
+[; ;main.c: 44: uint8_t nbPan;
+[; ;main.c: 45: SYSTEM_Initialize();
 "45
-[e ( _uartInitialize ..  ]
-[; ;main.c: 46: _uartPrint((char*)"Test");
+[e ( _SYSTEM_Initialize ..  ]
+[; ;main.c: 46: uartInitialize();
 "46
-[e ( __uartPrint (1 -> :s 1C `*uc ]
-[; ;main.c: 48: while(1)
+[e ( _uartInitialize ..  ]
+[; ;main.c: 47: MiApp_ProtocolInit(0);
+"47
+[e ( _MiApp_ProtocolInit (1 -> -> 0 `i `uc ]
+[; ;main.c: 48: MiApp_SetChannel(11);
 "48
-[e :U 807 ]
-[; ;main.c: 49: {
+[e ( _MiApp_SetChannel (1 -> -> 11 `i `uc ]
+[; ;main.c: 49: nbPan = MiApp_SearchConnection(10,0xFFFF);
 "49
-{
-[; ;main.c: 50: if (PIR3bits.RC2IF)
-"50
-[e $ ! != -> . . _PIR3bits 0 5 `i -> -> -> 0 `i `Vuc `i 809  ]
-[; ;main.c: 51: {
+[e = _nbPan ( _MiApp_SearchConnection (2 , -> -> 10 `i `uc -> -> 65535 `ui `ul ]
+[; ;main.c: 51: MiApp_EstablishConnection(0xFF, 0x01);
 "51
+[e ( _MiApp_EstablishConnection (2 , -> -> 255 `i `uc -> -> 1 `i `uc ]
+[; ;main.c: 57: _uartPrint((char*)"Test");
+"57
+[e ( __uartPrint (1 -> :s 1C `*uc ]
+[; ;main.c: 59: while(1)
+"59
+[e :U 807 ]
+[; ;main.c: 60: {
+"60
 {
-[; ;main.c: 52: _uartPrint((char*)"ok");
-"52
-[e ( __uartPrint (1 -> :s 2C `*uc ]
-[; ;main.c: 53: uartRead();
-"53
+[; ;main.c: 62: if (uartRead())
+"62
+[e $ ! != -> ( _uartRead ..  `i -> -> -> 0 `i `uc `i 809  ]
+[; ;main.c: 63: {
+"63
+{
+[; ;main.c: 64: CleanScreen();
+"64
+[e ( _CleanScreen ..  ]
+[; ;main.c: 65: uartRead();
+"65
 [e ( _uartRead ..  ]
-"54
+"66
 }
 [e :U 809 ]
-"55
+"67
 }
 [e :U 806 ]
-"48
+"59
 [e $U 807  ]
 [e :U 808 ]
-[; ;main.c: 54: }
-[; ;main.c: 55: }
-[; ;main.c: 56: }
-"56
+[; ;main.c: 66: }
+[; ;main.c: 67: }
+[; ;main.c: 68: }
+"68
 [e :UE 805 ]
 }
 [a 1C 84 101 115 116 0 ]
-[a 2C 111 107 0 ]
+

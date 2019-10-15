@@ -11299,9 +11299,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;miwi_mesh.c: 3565: myShortAddress.Val = 0xFFFF;
 "3565
 [e = . _myShortAddress 1 -> 65535 `ui ]
-[; ;miwi_mesh.c: 3566: myPANID.Val = 0x9999;
+[; ;miwi_mesh.c: 3566: myPANID.Val = 0x6666;
 "3566
-[e = . _myPANID 1 -> 39321 `ui ]
+[e = . _myPANID 1 -> -> 26214 `i `ui ]
 [; ;miwi_mesh.c: 3571: for(i = 0; i < 7; i++)
 "3571
 {
@@ -12832,9 +12832,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;miwi_mesh.c: 4820: myParent = 0xFF;
 "4820
 [e = _myParent -> -> 255 `i `uc ]
-[; ;miwi_mesh.c: 4825: myPANID.Val = 0x9999;
+[; ;miwi_mesh.c: 4825: myPANID.Val = 0x6666;
 "4825
-[e = . _myPANID 1 -> 39321 `ui ]
+[e = . _myPANID 1 -> -> 26214 `i `ui ]
 [; ;miwi_mesh.c: 4827: MiMAC_SetAltAddress(myShortAddress.v, myPANID.v);
 "4827
 [e ( _MiMAC_SetAltAddress (2 , &U . _myShortAddress 0 &U . _myPANID 0 ]

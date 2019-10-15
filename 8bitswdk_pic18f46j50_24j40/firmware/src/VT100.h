@@ -40,6 +40,7 @@ void uartHexaPrint(uint8_t * val,uint8_t n);
  *           Commandes VT100             
  *********************************************/
 void vT100EraseEndOfLine(void);
+void CleanScreen();
 
 
 
