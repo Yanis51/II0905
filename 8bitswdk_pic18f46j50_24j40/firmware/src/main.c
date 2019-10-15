@@ -41,28 +41,32 @@ extern RECEIVED_MESSAGE  rxMessage;
 
 void main (void)
 {
+    //RECEIVED_MESSAGE messageQ;
     uint8_t nbPan;
     SYSTEM_Initialize();
     uartInitialize();
+    CleanScreen();
     MiApp_ProtocolInit(false);
-    MiApp_SetChannel(11);
+    MiApp_SetChannel(15);
     nbPan =  MiApp_SearchConnection(10,0xFFFF);
-    //if(!nbPan) 
-    MiApp_EstablishConnection(0xFF, CONN_MODE_INDIRECT);
-   // MiApp_StartConnection(START_CONN_DIRECT, 10, 32);
-  
-    
-    
-    
-    uartPrint("Test");
-   
+    if(!nbPan) 
+    {
+        MiApp_StartConnection(START_CONN_DIRECT, 0, 0);
+        uartPrint("Aucun Pan trouve creation du pan");
+    }
+    else uartPrint("Pan trouve !");
+      MiApp_EstablishConnection(0xFF, CONN_MODE_DIRECT);
 	while(1)
     {
-
-        if (uartRead())
+        uartPrint(rxMessage.Payload);
+        MiApp_DiscardMessage();
+        if(MiApp_MessageAvailable())
         {
-            CleanScreen();
-            uartRead();
+            MiApp_DiscardMessage();
         }
+         MiApp_FlushTx();
+         MiApp_WriteData(0x48);
+         MiApp_BroadcastPacket(false);
+        
     }
 }
